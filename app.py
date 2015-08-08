@@ -3,7 +3,10 @@ from config import keys
 import Quandl
 
 app = Flask(__name__)
-
+@app.route("/")
+def root():
+    return "<h1>Stock Overflow</h1>"
+    
 @app.route("/<symbol>")
 def hello(symbol):
   datasets = Quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
