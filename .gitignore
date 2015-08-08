@@ -1,2 +1,5 @@
 # api keys
 config.py
+
+# ignore binaries
+*.pyc
