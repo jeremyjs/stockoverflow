@@ -1,10 +1,15 @@
-from sys import argv
-
 def movingAverage(closing_prices, period=5):
-    seq=closing_prices[0:5]
-    avg1=sum(seq)/5
-    print avg1
-    return [avg1,14,15]
+    averages=[]
+    num_averages=(len(closing_prices))-period+1
+    for i in range(num_averages):
+        j=i+period
+        seq=closing_prices[i:j]
+        avg=sum(seq)/period
+        avg=round(avg,2)
+        averages.append(avg)
+    print averages
+    return averages
+
 
 def test():
     L=[11,12,13,14,15,16,17]
@@ -12,5 +17,4 @@ def test():
     assert movingAverage(L) == result
     print "Test Pass"
 
-if(len(argv) > 1 and argv[1] == "test"):
-    test()
+test()
