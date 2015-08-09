@@ -1,4 +1,4 @@
-def movingAverage(closing_prices, period=5):
+def movingAverages(closing_prices, period=5):
     averages=[]
     num_averages=(len(closing_prices))-period+1
     for i in range(num_averages):
@@ -7,14 +7,14 @@ def movingAverage(closing_prices, period=5):
         avg=sum(seq)/period
         avg=round(avg,2)
         averages.append(avg)
-    print averages
+    # print averages
     return averages
 
 
 def test():
     L=[11,12,13,14,15,16,17]
     result=[13,14,15]
-    assert movingAverage(L) == result
+    assert movingAverages(L) == result
     print "Test Pass"
 
 test()

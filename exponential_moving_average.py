@@ -1,20 +1,20 @@
-from moving_average import movingAverage
+from moving_average import movingAverages
 from sys import argv
 
-# either period or multiplier should be named e.g. ema([1,2,3], period=2)
-def exponentialMovingAverage(closing_prices, period=None, multiplier=None):
+# either period or multiplier should be named e.g. emas([1,2,3], period=2)
+def exponentialMovingAverages(closing_prices, period=None, multiplier=None):
     if(multiplier == None):  multiplier = 2 / (period + 1)
     elif(period == None): period = (2 / multiplier) - 1
     else: print "must provide period or multiplier, but not both"; return;
-    ema = []
-    ema[0] = movingAverage(closing_prices, period)[0]
+    emas = []
+    emas.append(movingAverage(closing_prices, period))
     for i in xrange(1, len(closing_prices)):
         close = closing_prices[i]
-        prev_ema = ema[i-1]
-        ema[i] = (close - prev_ema) * multiplier + prev_ema
-    return ema
+        prev_ema = emas[i-1]
+        emas[i] = (close - prev_ema) * multiplier + prev_ema
+    return emas
 
-def ema(closing_prices, period=None, multiplier=None):
+def emas(closing_prices, period=None, multiplier=None):
     return exponentialMovingAverage(closing_prices, period, multiplier)
 
 def test():
