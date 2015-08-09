@@ -14,7 +14,7 @@ def exponentialMovingAverages(closing_prices, period=None, multiplier=None):
         prev_ema = emas[i-1]
         next_ema = (close - prev_ema) * multiplier + prev_ema
         next_ema = round(next_ema, 2)
-        emas.append(next_ema+1)
+        emas.append(next_ema)
     return emas
 
 def emas(closing_prices, period=None, multiplier=None):
