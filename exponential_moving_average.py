@@ -18,7 +18,7 @@ def exponentialMovingAverages(closing_prices, period=None, multiplier=None):
     return emas
 
 def emas(closing_prices, period=None, multiplier=None):
-    return exponentialMovingAverage(closing_prices, period, multiplier)
+    return exponentialMovingAverages(closing_prices, period, multiplier)
 
 def test():
     message = "exponentialMovingAverages"
