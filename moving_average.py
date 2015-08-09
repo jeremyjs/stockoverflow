@@ -1,3 +1,5 @@
+from sys import argv
+
 def movingAverages(closing_prices, period=5):
     averages=[]
     num_averages=(len(closing_prices))-period+1
@@ -12,9 +14,15 @@ def movingAverages(closing_prices, period=5):
 
 
 def test():
+    message = "movingAverages"
     L=[11,12,13,14,15,16,17]
-    result=[13,14,15]
-    assert movingAverages(L) == result
-    print "Test Pass"
+    expected = [13,14,15]
+    res = movingAverages(L)
+    if(res == expected):
+        message = "[....] " + message
+    else:
+        message = "[FAIL] " + message + ": Expected " + str(res) + " to equal " + str(expected)
+    print message
 
-test()
+if(len(argv) > 1 and argv[1] == "test"):
+    test()
