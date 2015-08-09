@@ -7,7 +7,7 @@ def exponentialMovingAverages(closing_prices, period=None, multiplier=None):
     elif(period == None): period = (2 / multiplier) - 1
     else: print "must provide period or multiplier, but not both"; return;
     emas = []
-    emas.append(movingAverage(closing_prices, period))
+    emas.append(movingAverages(closing_prices, period))
     for i in xrange(1, len(closing_prices)):
         close = closing_prices[i]
         prev_ema = emas[i-1]
@@ -20,7 +20,7 @@ def emas(closing_prices, period=None, multiplier=None):
 def test():
     cp = [22.27,22.19,22.08,22.17,22.18,22.13,22.23,22.43,22.24,22.29,22.15,22.39]
     expected = [22.22, 22.21, 22.24]
-    res = exponentialMovingAverage(cp, period=10)
+    res = exponentialMovingAverages(cp, period=10)
     if(res == expected):
         print "Test Pass"
     else:
