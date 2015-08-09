@@ -1,8 +1,12 @@
 from sys import argv
 
 def movingAverages(closing_prices, period=5):
+    len_closing_prices = len(closing_prices)
+    if(len_closing_prices < period):
+        print "movingAverages: `period` must be less than number of `closing_prices`"
+        return
     averages=[]
-    num_averages=(len(closing_prices))-period+1
+    num_averages = len_closing_prices - period + 1
     for i in range(num_averages):
         j=i+period
         seq=closing_prices[i:j]
