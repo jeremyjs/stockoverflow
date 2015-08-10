@@ -6,8 +6,11 @@ DEFAULT_SHORT_PERIOD = 12
 DEFAULT_LONG_PERIOD  = 26
 
 def macd(prices, short_period=DEFAULT_SHORT_PERIOD, long_period=DEFAULT_LONG_PERIOD):
-    short_ma = emas(prices, short_period)
     long_ma  = emas(prices, long_period)
+    short_ma = emas(prices, short_period)
+
+    # lists must be the same length
+    short_ma = short_ma[len(short_ma)-len(long_ma):len(short_ma)]
 
     return signalCrosses(short_ma, long_ma)
 
