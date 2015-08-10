@@ -2,9 +2,12 @@ from exponential_moving_average import emas
 from signal_crosses import signalCrosses
 from sys import argv
 
-def macd(closing_prices, short_period=12, long_period=26):
-    short_ma = emas(closing_prices, short_period)
-    long_ma  = emas(closing_prices, long_period)
+DEFAULT_SHORT_PERIOD = 12
+DEFAULT_LONG_PERIOD  = 26
+
+def macd(prices, short_period=DEFAULT_SHORT_PERIOD, long_period=DEFAULT_LONG_PERIOD):
+    short_ma = emas(prices, short_period)
+    long_ma  = emas(prices, long_period)
 
     return signalCrosses(short_ma, long_ma)
 

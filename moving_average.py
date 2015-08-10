@@ -1,15 +1,15 @@
 from sys import argv
 
-def movingAverages(closing_prices, period=5):
-    len_closing_prices = len(closing_prices)
-    if(len_closing_prices < period):
-        print "movingAverages: `period` must be less than number of `closing_prices`"
+def movingAverages(prices, period=5):
+    len_prices = len(prices)
+    if(len_prices < period):
+        print "movingAverages: `period` must be less than number of `prices`"
         return
     averages=[]
-    num_averages = len_closing_prices - period + 1
+    num_averages = len_prices - period + 1
     for i in range(num_averages):
         j=i+period
-        seq=closing_prices[i:j]
+        seq=prices[i:j]
         avg=sum(seq)/period
         avg=round(avg,2)
         averages.append(avg)
