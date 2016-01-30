@@ -31,10 +31,8 @@ def run_simulation(symbol):
 @app.route('/<symbol>')
 def hello(symbol):
     query_params = request.args
-    print (query_params)
     trim_start = query_params.get('start_date') or '2015-12-01'
     trim_end = query_params.get('end_date') or '2015-12-31'
-    print (trim_end, trim_start)
     datasets = Quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
     code = datasets[0][u'code']
     data = Quandl.get(code, authtoken=keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)

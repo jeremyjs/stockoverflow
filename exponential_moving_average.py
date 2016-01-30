@@ -29,7 +29,6 @@ def ewmas(prices, period=None, multiplier=None):
     period, multiplier = default_period_multiplier(period, multiplier)
     price_series = pandas.Series(data=prices)
     ewmas = pandas.ewma(price_series, span=period)
-    print type(ewmas)
     return ewmas
 
 def test():

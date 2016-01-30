@@ -15,7 +15,6 @@ def max_earnings(prices, signal_crosses, budget=1):
         elif(signal == BUY):
             cash_on_hand += shares * price
             shares = 0
-        print (date, price, signal, shares, cash_on_hand)
     final_value = max(cash_on_hand, shares * prices.values()[-1])
     earnings = final_value - budget
     return earnings
