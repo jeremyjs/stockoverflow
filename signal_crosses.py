@@ -8,7 +8,7 @@ SELL = -1
 HOLD =  0
 
 # TODO: rename signal_crosses
-def signalCrosses(short_moving_averages, long_moving_averages):
+def signal_crosses(short_moving_averages, long_moving_averages):
     short_moving_averages = SortedDict(short_moving_averages)
     long_moving_averages = SortedDict(long_moving_averages)
 
@@ -16,7 +16,7 @@ def signalCrosses(short_moving_averages, long_moving_averages):
     long_len  = len(long_moving_averages.values())
 
     if(short_len != long_len):
-        print "[Error] signalCrosses: inputs must be same size"
+        print "[Error] signal_crosses: inputs must be same size"
         return {}
 
     signal_crosses = {}
@@ -40,12 +40,12 @@ def signalCrosses(short_moving_averages, long_moving_averages):
     return SortedDict(signal_crosses)
 
 def test():
-    message = "signalCrosses"
+    message = "signal_crosses"
 
     s = {'1': 8, '2': 10, '3': 12, '4': 14, '5': 13, '6': 10, '7': 7}
     l = {'1': 9, '2': 10, '3': 11, '4': 13, '5': 12, '6': 11, '7': 8}
 
-    res = signalCrosses(s, l)
+    res = signal_crosses(s, l)
     expected = {'1': HOLD, '2': BUY, '3': HOLD, '4': HOLD, '5': HOLD, '6': SELL, '7': HOLD}
 
     if(res == expected):

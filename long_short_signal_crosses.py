@@ -1,5 +1,5 @@
 from exponential_moving_average import emas
-from signal_crosses import signalCrosses
+from signal_crosses import signal_crosses
 from sys import argv
 from math import floor
 
@@ -17,7 +17,7 @@ def long_short_signal_crosses(prices, short_period=DEFAULT_SHORT_PERIOD, long_pe
     # lists must be the same length
     short_ma = short_ma[len(short_ma)-len(long_ma):len(short_ma)]
 
-    return signalCrosses(short_ma, long_ma)
+    return signal_crosses(short_ma, long_ma)
 
 def lssc_interval(prices, interval):
     interval_multipliers = {
