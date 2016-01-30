@@ -1,5 +1,6 @@
 from moving_average import moving_averages
 from sys import argv
+import pandas
 
 def default_period_multiplier(period=None, multiplier=None):
     if(period == None): period = (2.0 / multiplier) - 1
@@ -27,7 +28,9 @@ def emas(prices, period=None, multiplier=None):
 def ewmas(prices, period=None, multiplier=None):
     period, multiplier = default_period_multiplier(period, multiplier)
     price_series = pandas.Series(data=prices)
-    return list(pandas.ewma(price_series, span=period))
+    ewmas = pandas.ewma(price_series, span=period)
+    print type(ewmas)
+    return ewmas
 
 def test():
     message = "exponentialMovingAverages"
