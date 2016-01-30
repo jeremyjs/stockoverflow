@@ -1,11 +1,16 @@
 from moving_average import movingAverages
 from sys import argv
 
-# either period or multiplier should be named e.g. emas([1,2,3], period=2)
-def exponentialMovingAverages(prices, period=None, multiplier=None):
-    if(multiplier == None):  multiplier = 2.0 / (period + 1)
-    elif(period == None): period = (2.0 / multiplier) - 1
+def default_period_multiplier(period=None, multiplier=None):
+    if(period == None): period = (2.0 / multiplier) - 1
+    elif(multiplier == None):  multiplier = 2.0 / (period + 1)
     else: print "must provide period or multiplier, but not both"; return;
+    return (period, multiplier)
+
+# emas: Exponential Moving Averages
+# either period or multiplier should be provided e.g. emas([1,2,3], period=2)
+def emas(prices, period=None, multiplier=None):
+    period, multiplier = default_period_multiplier(period, multiplier)
     emas = []
     regular_mas = movingAverages(prices, period)
     emas.append(regular_mas[0])
@@ -17,8 +22,12 @@ def exponentialMovingAverages(prices, period=None, multiplier=None):
         emas.append(next_ema)
     return emas
 
-def emas(prices, period=None, multiplier=None):
-    return exponentialMovingAverages(prices, period, multiplier)
+# ewmas: Exponential Weighted Moving Averages
+# either period or multiplier should be provided e.g. emas([1,2,3], period=2)
+def ewmas(prices, period=None, multiplier=None):
+    period, multiplier = default_period_multiplier(period, multiplier)
+    price_series = pandas.Series(data=prices)
+    return list(pandas.ewma(price_series, span=period))
 
 def test():
     message = "exponentialMovingAverages"
