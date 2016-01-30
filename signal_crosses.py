@@ -1,11 +1,7 @@
 from numpy import sign
 from sys import argv
 from sortedcontainers import SortedDict
-
-# TODO: proper enum
-BUY  =  1
-SELL = -1
-HOLD =  0
+from buy_sell_hold import BUY, SELL, HOLD
 
 # TODO: rename signal_crosses
 def signal_crosses(short_moving_averages, long_moving_averages):
