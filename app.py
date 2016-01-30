@@ -1,12 +1,13 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from config import keys
+from sortedcontainers import SortedDict
 import Quandl
 import json
 
 from simulate import simulate
 from get_prices import get_prices
+from config import keys
 
 app = Flask(__name__.split('.')[0])
 @app.route('/')
@@ -20,13 +21,17 @@ def run_simulation(symbol):
     trim_end = query_params.get('end_date') or '2015-12-31'
     prices = get_prices([symbol], trim_start=trim_start, trim_end=trim_end)
     prices = prices[symbol]
-    signal_crosses, earnings = simulate(prices)
+    signal_crosses, simulation, earnings = simulate(prices)
     dailies = prices
     for timestamp in dailies.keys():
-        dailies[timestamp] = { 'price': prices[timestamp], 'signal': signal_crosses[timestamp] }
-    signal_crosses = [ [k, v] for k, v in signal_crosses.iteritems()]
-    prices = { s: [ [k, v] for k, v in prices[s].iteritems()] for s in prices.keys() }
-    return json.dumps({'earnings': earnings, 'dailies': dailies, 'prices': prices, 'signal_crosses': signal_crosses})
+        dailies[timestamp] = {
+            'price': prices[timestamp],
+            'signal': signal_crosses[timestamp],
+            'shares': simulation[timestamp]['shares'],
+            'cash_on_hand': simulation[timestamp]['cash_on_hand']
+        }
+    dailies = SortedDict(dailies)
+    return json.dumps({'earnings': earnings, 'dailies': dailies})
 
 @app.route('/<symbol>')
 def hello(symbol):
