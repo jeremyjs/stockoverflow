@@ -1,43 +1,58 @@
 from numpy import sign
 from sys import argv
+from sortedcontainers import SortedDict
 
+# TODO: proper enum
+BUY  =  1
+SELL = -1
+HOLD =  0
+
+# TODO: rename signal_crosses
 def signalCrosses(short_moving_averages, long_moving_averages):
-    short_len = len(short_moving_averages)
-    long_len  = len(long_moving_averages)
+    short_moving_averages = SortedDict(short_moving_averages)
+    long_moving_averages = SortedDict(long_moving_averages)
+
+    short_len = len(short_moving_averages.values())
+    long_len  = len(long_moving_averages.values())
+
     if(short_len != long_len):
-        print "[Error] signalCrosses: input lists must be same length"
-        return []
-    ma_len = short_len
-    up_crosses = []
-    down_crosses = []
+        print "[Error] signalCrosses: inputs must be same size"
+        return {}
+
+    signal_crosses = {}
     last_diff_dir = 0
-    start = 0
-    for i in xrange(0, ma_len-1):
-        diff = short_moving_averages[i] - long_moving_averages[i]
-        if(diff != 0):
-            start = i
-            last_diff_dir = sign(diff)
-            break
-    for i in xrange(start, ma_len-1):
-        new_diff = short_moving_averages[i] - long_moving_averages[i]
-        if(sign(new_diff) != last_diff_dir):
-            if(last_diff_dir < 0):
-                up_crosses.append(i)
-            else:
-                down_crosses.append(i)
+    for date, short_average in short_moving_averages.iteritems():
+        long_average = long_moving_averages[date]
+        diff = short_average - long_average
+
+        if(last_diff_dir == 0):
+            signal_crosses[date] = HOLD
+            if(diff != 0):
+                last_diff_dir = sign(diff)
+            continue
+
+        if(sign(diff) != last_diff_dir):
+            signal_crosses[date] = BUY if last_diff_dir < 0 else SELL
             last_diff_dir = -last_diff_dir
-    return { "up_crosses": up_crosses, "down_crosses": down_crosses }
+        else:
+            signal_crosses[date] = HOLD
+
+    return SortedDict(signal_crosses)
 
 def test():
     message = "signalCrosses"
-    s = [8, 10, 12, 14, 13, 10, 7]
-    l = [9, 10, 11, 13, 12, 11, 8]
+
+    s = {'1': 8, '2': 10, '3': 12, '4': 14, '5': 13, '6': 10, '7': 7}
+    l = {'1': 9, '2': 10, '3': 11, '4': 13, '5': 12, '6': 11, '7': 8}
+
     res = signalCrosses(s, l)
-    expected = {'up_crosses': [1], 'down_crosses': [5]}
+    expected = {'1': HOLD, '2': BUY, '3': HOLD, '4': HOLD, '5': HOLD, '6': SELL, '7': HOLD}
+
     if(res == expected):
         message = "[....] " + message
     else:
         message = "[FAIL] " + message + ": Expected " + str(res) + " to equal " + str(expected)
+
     print message
 
 if(len(argv) > 1 and argv[1] == "test"):
