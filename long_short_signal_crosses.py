@@ -1,4 +1,4 @@
-from exponential_moving_average import emas
+from exponential_moving_average import ewmas
 from signal_crosses import signal_crosses
 from sys import argv
 from math import floor
@@ -11,8 +11,8 @@ def long_short_signal_crosses(prices, short_period=DEFAULT_SHORT_PERIOD, long_pe
     long_period = min(long_period, num_prices)
     if short_period == DEFAULT_SHORT_PERIOD:
         short_period = min(short_period, num_prices, int(round(.46*long_period)))
-    long_ma  = emas(prices, long_period)
-    short_ma = emas(prices, short_period)
+    long_ma  = ewmas(prices, long_period)
+    short_ma = ewmas(prices, short_period)
 
     # lists must be the same length
     short_ma = short_ma[len(short_ma)-len(long_ma):len(short_ma)]
