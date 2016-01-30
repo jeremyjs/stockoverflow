@@ -1,11 +1,16 @@
 from exponential_moving_average import emas
 from signal_crosses import signalCrosses
 from sys import argv
+from math import floor
 
 DEFAULT_SHORT_PERIOD = 12
 DEFAULT_LONG_PERIOD  = 26
 
 def macd(prices, short_period=DEFAULT_SHORT_PERIOD, long_period=DEFAULT_LONG_PERIOD):
+    num_prices = len(prices)
+    long_period = min(long_period, num_prices)
+    if short_period == DEFAULT_SHORT_PERIOD:
+        short_period = min(short_period, num_prices, int(round(.46*long_period)))
     long_ma  = emas(prices, long_period)
     short_ma = emas(prices, short_period)
 
@@ -32,14 +37,15 @@ def macd_hourly(prices):
 
 def test():
     message = "macd"
-    cp = [22.27,22.19,22.08,22.17,22.18,22.13,22.23,22.43,22.24,22.29,22.15,22.39]
+    cp = [22.27,22.19,22.08,22.17,22.18,22.13,22.23,22.43,22.24,22.29,22.15,22.39,22.18,22.13,22.19,22.08,22.17,22.23,22.43]
     res = macd(cp, short_period=3, long_period=7)
-    print(res)
-    return
+    expected = {'up_crosses': [5, 11], 'down_crosses': [4, 6]}
+
     if(res == expected):
         message = "[....] " + message
     else:
         message = "[FAIL] " + message + ": Expected " + str(res) + " to equal " + str(expected)
+
     print message
 
 if(len(argv) > 1 and argv[1] == "test"):
