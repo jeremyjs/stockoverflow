@@ -4,7 +4,7 @@ def movingAverages(prices, period=5):
     len_prices = len(prices)
     if(len_prices < period):
         print "movingAverages: `period` must be less than number of `prices`"
-        return
+        return []
     averages=[]
     num_averages = len_prices - period + 1
     for i in range(num_averages):
