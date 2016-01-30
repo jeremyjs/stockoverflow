@@ -6,6 +6,7 @@
 flask
 quandle
 pandas
+sortedcontainers
 
 #
 ###### Requirements with Version Specifiers ######
