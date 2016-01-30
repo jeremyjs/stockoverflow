@@ -1,9 +1,9 @@
 from sys import argv
 
-def movingAverages(prices, period=5):
+def moving_averages(prices, period=5):
     len_prices = len(prices)
     if(len_prices < period):
-        print "movingAverages: `period` must be less than number of `prices`"
+        print "moving_averages: `period` must be less than number of `prices`"
         return []
     averages=[]
     num_averages = len_prices - period + 1
@@ -18,10 +18,10 @@ def movingAverages(prices, period=5):
 
 
 def test():
-    message = "movingAverages"
+    message = "moving_averages"
     L=[11,12,13,14,15,16,17]
     expected = [13,14,15]
-    res = movingAverages(L)
+    res = moving_averages(L)
     if(res == expected):
         message = "[....] " + message
     else:

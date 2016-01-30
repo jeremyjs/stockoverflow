@@ -1,4 +1,4 @@
-from moving_average import movingAverages
+from moving_average import moving_averages
 from sys import argv
 
 def default_period_multiplier(period=None, multiplier=None):
@@ -12,7 +12,7 @@ def default_period_multiplier(period=None, multiplier=None):
 def emas(prices, period=None, multiplier=None):
     period, multiplier = default_period_multiplier(period, multiplier)
     emas = []
-    regular_mas = movingAverages(prices, period)
+    regular_mas = moving_averages(prices, period)
     emas.append(regular_mas[0])
     for i in xrange(1, len(regular_mas)):
         close = prices[len(prices)-len(regular_mas)+i]
