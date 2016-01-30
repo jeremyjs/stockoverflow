@@ -15,7 +15,7 @@ def get_prices(symbols, trim_start='2015-12-01', trim_end='2015-12-31'):
         input_data = Quandl.get(code, authtoken=auth_keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)
         input_data = input_data.to_json()
         input_data = json.loads(input_data)
-        close_prices = input_data['Close']
+        close_prices = input_data['Close'] if 'Close' in input_data else input_data['CLOSE']
         prices[symbol] = close_prices
     return prices
 
