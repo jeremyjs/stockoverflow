@@ -9,7 +9,6 @@ def get_code(symbol):
     return code
 
 def get_prices(symbols, trim_start='2015-12-01', trim_end='2015-12-31'):
-    print ('symbols: ', symbols)
     prices = {}
     for symbol in symbols:
         code = get_code(symbol)
@@ -17,7 +16,6 @@ def get_prices(symbols, trim_start='2015-12-01', trim_end='2015-12-31'):
         input_data = input_data.to_json()
         input_data = json.loads(input_data)
         close_prices = input_data['Close']
-        close_prices = close_prices.values()
         prices[symbol] = close_prices
     return prices
 
