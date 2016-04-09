@@ -35,30 +35,23 @@ def test():
     print message
 
 def curr_signal(prices):
-    message = "curr_signal"
     currprices = list[-5:]
     sma = (sum(currprices)/5)
     ema = ewmas(prices, 5)
-    swap = false 
+    trend_val = sign(ema-sma)
     i=1
-    trend_val = ema-sma
-    while(!swap || i < len(prices)-5)
+
+    while ( (not swap) or (i < len(prices)-5) ):
         currprices = prices[-5-i:-i]
         sma = (sum(currprices)/5)
         ema = ewmas(prices, 5)
 
-        if (trend_val < ema-sma)
-            swap = true
-            return -1
-        if (trend_val > ema-sma)
-            swap = true
-            return 1
+        if (trend_val != sign(ema-sma)):
+            return (trend_val, i)
+
         i+=1
-        count+=1
-        
 
-
-    return('up_crosses', 'down_crosses')
+    return (trend_val, -1)
 
 if(len(argv) > 1 and argv[1] == "test"):
     test()
