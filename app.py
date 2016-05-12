@@ -16,6 +16,11 @@ app = Flask(__name__.split('.')[0])
 def root():
     return render_template('landing.html')
 
+@app.route('/forex/<symbol>')
+def forex_data(symbol):
+    data = {'symbol': 'USDJPY', 'rate': 120.23}
+    return json.dumps({'data': data})
+
 @app.route('/simulate/<symbol>')
 def run_simulation(symbol):
     query_params = request.args
