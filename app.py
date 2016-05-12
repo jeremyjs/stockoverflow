@@ -4,7 +4,9 @@ from flask import request
 from sortedcontainers import SortedDict
 import Quandl
 import json
+import sys
 
+sys.path.append('./src')
 from simulate import simulate
 from get_prices import get_prices
 from config import keys
