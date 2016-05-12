@@ -36,7 +36,7 @@ def run_simulation(symbol):
     return json.dumps({'earnings': earnings, 'dailies': dailies})
 
 @app.route('/<symbol>')
-def hello(symbol):
+def info(symbol):
     query_params = request.args
     trim_start = query_params.get('start_date') or '2015-12-01'
     trim_end = query_params.get('end_date') or '2015-12-31'
