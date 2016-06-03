@@ -1,0 +1,51 @@
+{% extends "layout.html" -%}
+{% block content -%}
+    <h1 class="market-title"> Forex </h1>
+    <div class="valign-wrapper">
+        <div class="widget-container">
+            <div class="widget">
+                <div class="widget-line">
+                    <label for="buy-value"> Buy </label>
+                    <span id="buy-value">{%= buyValue %}</span>
+                </div>
+                <div class="widget-line">
+                    <label for="sell-value"> Sell </label>
+                    <span id="sell-value">{%= sellValue %}</span>
+                </div>
+                <div class="widget-line">
+                    <label for="signal-value-up"> Signal </label>
+                    <span id="signal-value-up">
+                        <span class="signal-icon-up">
+                        <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
+                       </span>
+                    </span>
+                </div>
+                <div class="widget-line">
+                    <label for="signal-value-down"> Signal </label>
+                    <span id="signal-value-down">
+                        <span class="signal-icon-down">
+                        <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                       </span>
+                        {%= signalValue %}
+                    </span>
+                </div>
+                <div class="widget-line">
+                  <select>
+                    <option value="USD/JPY"></option>
+                    <option value="JPY/AUD"></option>
+                    <option value="AUD/YEN"></option>
+                    <option value="POUND/CAD"></option>
+                  </select>
+                </div>
+                <div class="widget-line">
+                  <select>
+                    <option value="USD"></option>
+                    <option value="JPY"></option>
+                    <option value="AUD"></option>
+                    <option value="POUND"></option>
+                  </select>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock content %}
