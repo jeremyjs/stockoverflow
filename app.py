@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from sortedcontainers import SortedDict
+from bson.objectid import ObjectId
+from bson.json_util import dumps as bsonDumps
 import Quandl
 import json
 import sys
@@ -11,10 +13,24 @@ from simulate import simulate
 from get_prices import get_prices
 from config import keys
 
+sys.path.append('./db')
+from connection import truefx
+
 app = Flask(__name__.split('.')[0])
 @app.route('/')
 def root():
     return render_template('landing.html')
+
+@app.route('/truefx/symbol/<symbol>')
+def truefx_find_by_symbol(symbol):
+    symbol = symbol[0:3] + '/' + symbol[3:6]
+    cursor = truefx.find({'symbol': symbol})
+    results = {}
+    for record in cursor:
+        record['_id'] = str(record['_id'])
+        record.pop('__v', None)
+        results[str(int(record['timestamp']))] = record
+    return json.dumps({'symbol': symbol, 'data': results})
 
 @app.route('/forex/<symbol>')
 def forex_data(symbol):
