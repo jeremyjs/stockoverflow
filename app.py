@@ -21,6 +21,7 @@ from connection import truefx
 app = Flask(__name__.split('.')[0])
 my_loader = jinja2.ChoiceLoader([
     app.jinja_loader,
+    jinja2.FileSystemLoader('.'),
     jinja2.FileSystemLoader('./src/client/templates'),
 ])
 app.jinja_loader = my_loader
@@ -28,6 +29,10 @@ app.jinja_loader = my_loader
 @app.route('/')
 def root():
     return render_template('landing.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 @app.route('/truefx/symbol/<symbol>')
 def truefx_find_by_symbol(symbol):
@@ -45,7 +50,7 @@ def forex_data(symbol):
     data = {'symbol': 'USDJPY', 'rate': 120.23}
     return json.dumps({'data': data})
 
-@app.route('/simulate/<symbol>')
+@app.route('/simulate/<symbol>.json')
 def run_simulation(symbol):
     query_params = request.args
     trim_start = query_params.get('start_date') or '2015-11-01'
@@ -65,6 +70,16 @@ def run_simulation(symbol):
     return json.dumps({'earnings': earnings, 'dailies': dailies})
 
 @app.route('/symbol/<symbol>')
+def symbol_overview(symbol):
+    query_params = request.args
+    trim_start = query_params.get('start_date') or '2015-12-01'
+    trim_end = query_params.get('end_date') or '2015-12-31'
+    database_code = query_params.get('database_code') or 'WIKI'
+    # datasets = quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
+    code = database_code + "/" + symbol  # datasets[0][u'code']
+    data = quandl.get(code, authtoken=keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)
+    return render_template('symbol_overview.html', title=symbol, data=data)
+
 def info(symbol):
     query_params = request.args
     trim_start = query_params.get('start_date') or '2015-12-01'
