@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>StockOverflow</title>
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" rel="stylesheet">
-    <link href={{ url_for('static', filename='css/c3.css') }} rel="stylesheet">
+    <link href={{ url_for('static', filename='css/vendor/materialize.css') }} rel="stylesheet">
+    <link href={{ url_for('static', filename='css/vendor/c3.css') }} rel="stylesheet">
     <link href={{ url_for('static', filename='css/style.css') }} rel="stylesheet">
 </head>
 <body>
@@ -13,8 +13,10 @@
         {% block content %}{% endblock content %}
     </div>
 
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <script src={{ url_for('static', filename='js/c3.js') }}></script>
+    <script src={{ url_for('static', filename='js/vendor/jquery-3.1.1.min.js') }}></script>
+    <script src={{ url_for('static', filename='js/vendor/materialize.js') }}></script>
+    <script src={{ url_for('static', filename='js/vendor/d3.js') }} charset="utf-8"></script>
+    <script src={{ url_for('static', filename='js/vendor/c3.js') }}></script>
+    <script src={{ url_for('static', filename='js/simulation-chart.js') }}></script>
 </body>
 </html>
