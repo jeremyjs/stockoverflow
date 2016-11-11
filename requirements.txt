@@ -2,11 +2,13 @@
 ####### example-requirements.txt #######
 #
 
+## NOTE: these specs assume usage of conda package installer
+
 ###### Requirements without Version Specifiers ######
 flask
 pymongo
 pandas
-sortedcontainers
+# Quantopian/sortedcontainers: `conda install -c quantopian sortedcontainers`
 Quandl
 
 #
