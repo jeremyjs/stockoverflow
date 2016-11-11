@@ -7,6 +7,7 @@ from bson.json_util import dumps as bsonDumps
 import quandl
 import json
 import sys
+import jinja2
 
 sys.path.append('./src/server')
 from simulate import simulate
@@ -16,7 +17,14 @@ from config import keys
 sys.path.append('./src/server/db')
 from connection import truefx
 
+# Custom config for templates folder
 app = Flask(__name__.split('.')[0])
+my_loader = jinja2.ChoiceLoader([
+    app.jinja_loader,
+    jinja2.FileSystemLoader('./src/client/templates'),
+])
+app.jinja_loader = my_loader
+
 @app.route('/')
 def root():
     return render_template('landing.html')
