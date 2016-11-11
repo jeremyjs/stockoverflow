@@ -4,16 +4,16 @@ from flask import request
 from sortedcontainers import SortedDict
 from bson.objectid import ObjectId
 from bson.json_util import dumps as bsonDumps
-import Quandl
+import quandl
 import json
 import sys
 
-sys.path.append('./src')
+sys.path.append('./src/server')
 from simulate import simulate
 from get_prices import get_prices
 from config import keys
 
-sys.path.append('./db')
+sys.path.append('./src/server/db')
 from connection import truefx
 
 app = Flask(__name__.split('.')[0])

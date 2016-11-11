@@ -1,7 +1,11 @@
-from config import keys as auth_keys
-from sys import argv
-import Quandl
+import sys
+import quandl
 import json
+
+sys.path.append('../../')
+from config import keys as auth_keys
+
+argv = sys.argv
 
 def get_code(symbol):
     datasets = Quandl.search(symbol, authtoken=auth_keys['quandl'], verbose = False)
