@@ -56,14 +56,15 @@ def run_simulation(symbol):
     dailies = SortedDict(dailies)
     return json.dumps({'earnings': earnings, 'dailies': dailies})
 
-@app.route('/<symbol>')
+@app.route('/symbol/<symbol>')
 def info(symbol):
     query_params = request.args
     trim_start = query_params.get('start_date') or '2015-12-01'
     trim_end = query_params.get('end_date') or '2015-12-31'
-    datasets = Quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
-    code = datasets[0][u'code']
-    data = Quandl.get(code, authtoken=keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)
+    database_code = query_params.get('database_code') or 'WIKI'
+    # datasets = quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
+    code = database_code + "/" + symbol  # datasets[0][u'code']
+    data = quandl.get(code, authtoken=keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)
     return data.to_html()
 
 if __name__ == '__main__':
