@@ -22,13 +22,14 @@ app = Flask(__name__.split('.')[0])
 my_loader = jinja2.ChoiceLoader([
     app.jinja_loader,
     jinja2.FileSystemLoader('.'),
+    jinja2.FileSystemLoader('./static'),
     jinja2.FileSystemLoader('./src/client/templates'),
 ])
 app.jinja_loader = my_loader
 
 @app.route('/')
 def root():
-    return render_template('landing.html')
+    return render_template('index.html')
 
 @app.route('/dashboard')
 def dashboard():
