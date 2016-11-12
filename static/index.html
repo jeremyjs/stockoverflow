@@ -11,29 +11,32 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src={{ url_for('static', filename='assets/js/ie/html5shiv.js') }}></script><![endif]-->
 		<link rel="stylesheet" href={{ url_for('static', filename='assets/css/main.css') }} />
+		<link rel="stylesheet" href={{ url_for('static', filename='css/landing-custom.css') }} />
 		<!--[if lte IE 8]><link rel="stylesheet" href={{ url_for('static', filename='assets/css/ie8.css') }} /><![endif]-->
 	</head>
 	<body>
 
 		<!-- Header -->
 			<div id="header">
-				<span class="logo icon fa-paper-plane-o"></span>
+				<span class="logo icon fa-signal"></span>
 				<h1>This is StockOverflow</h1>
-				<p>A Comprehensive Stock Trend Analyzer & Trading Application <br> <a href="http://www.ew.com/sites/default/files/styles/tout_image_612x380/public/1455759923/kanye-1.jpg?itok=qDlUsJKd"> Developed by </a>
-				<br />
+				<p>
+					A Comprehensive Stock Trend Analyzer &amp; Trading Application
 				</p>
-				<a href="http://jeremymeyer.io">Jeremy Meyer</a>
-				</a>
-				 & <a href="https://www.linkedin.com/in/will-meyer-361aa9105?trk=hp-identity-name">Will Meyer</a>.</p>
+				<a href="/symbol/TSLA" title="Tesla Stock Analysis" class="action button">Try now!</a>
 			</div>
 
 		<!-- Main -->
 			<div id="main">
 
 				<header class="major container 75%">
-					<h2>Using complex trading algorithms, we help you to smart trading decisions
-					<br />
-					And control the universe</h2>
+					<h2>
+						Our complex trading algorithms
+						<br />
+						help you make smart trading decisions
+						<br />
+						and control the universe
+					</h2>
 					<!--
 					<p>Tellus erat mauris ipsum fermentum<br />
 					etiam vivamus nunc nibh morbi.</p>
@@ -42,26 +45,33 @@
 
 				<div class="box alt container">
 					<section class="feature left">
-						<a href="#" class="image icon fa-signal"><img src={{ url_for('static', filename='images/pic01.jpg') }} alt="" /></a>
+						<a href="#" class="image icon fa-line-chart"><img src={{ url_for('static', filename='images/pic01.jpg') }} alt="" /></a>
 						<div class="content">
-							<h3>The Way StockOverflow Works</h3>
-							<p>You give us a publically traded stock and we will tell you when to buy or sell the stock so you make the most money.</p>
+							<h3>How StockOverflow Works</h3>
+							<p>Search any publically traded stock and discover when to buy or sell and make the most money.</p>
 						</div>
 					</section>
 					<section class="feature right">
 						<a href="#" class="image icon fa-code"><img src={{ url_for('static', filename='images/pic02.jpg') }} alt="" /></a>
 						<div class="content">
 							<h3>Stocks Are Our Passion</h3>
-							<p>We have made it our goal to bring you the best free solution to trade stocks effectivly. If you're looking to day trade, StockOverflow will put you on the right track.</p>
+							<p>Our goal is to create the best free solution for stock analysis and algorithmic trading. StockOverflow is simple, yet powerful, with a beautiful interface.</p>
 						</div>
 					</section>
 					<section class="feature left">
-						<a href="#" class="image icon fa-mobile"><img src={{ url_for('static', filename='images/pic03.jpg') }} alt="" /></a>
+						<a href="#" class="image icon fa-users"><img src={{ url_for('static', filename='images/pic03.jpg') }} alt="" /></a>
 						<div class="content">
-							<h3>The Third Thing</h3>
-							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
+							<h3>Community Driven</h3>
+							<p>We are constantly and consistently improving the platform based on feedback from all of our users.</p>
 						</div>
 					</section>
+				</div>
+
+				<div class="last-chance">
+					<h2>What are you waiting for?</h2>
+					<ul class="vertical actions">
+						<li><input type="submit" value="Try now!" /></li>
+					</ul>
 				</div>
 
 				<!--
@@ -214,10 +224,20 @@
 				-->
 
 				<footer class="major container 75%">
-					<h3>Get shady with science</h3>
-					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
-					<ul class="actions">
-						<li><a href="#" class="button">Join our crew</a></li>
+					<h2 class="title">The Team</h2>
+					<ul class="team">
+						<li>
+							<a target="_blank" href="http://jeremymeyer.io">
+								<img class="team-img" src={{ url_for('static', filename='images/jeremy.jpg') }} alt="Jeremy Meyer">
+								<p>Jeremy Meyer</p>
+							</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://linkedin.com/in/will-meyer-361aa9105">
+								<img class="team-img" src={{ url_for('static', filename='images/will.jpg') }} alt="Will Meyer">
+								<p>Will Meyer</p>
+							</a>
+						</li>
 					</ul>
 				</footer>
 
@@ -228,10 +248,28 @@
 				<div class="container 75%">
 
 					<header class="major last">
-						<h2>Questions or comments?</h2>
+						<h2>Get Personal Investing Advice</h2>
+						<p class="subheader">Sign up for our free 5 day investing course to get personal, tailored advice for your specific interests. You won't find this anywhere else!</p>
 					</header>
 
-					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor
+					<ul class="vertical actions">
+						<li><input type="text" placeholder="Email" /></li>
+						<li><input type="submit" value="Get your first tip" /></li>
+					</ul>
+
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Stockoverflow. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+					{# <p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor
 					orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
 
 					<form method="post" action="#">
@@ -255,19 +293,7 @@
 								</ul>
 							</div>
 						</div>
-					</form>
-
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-					</ul>
-
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
+					</form> #}
 
 				</div>
 			</div>
