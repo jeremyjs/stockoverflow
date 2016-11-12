@@ -71,6 +71,24 @@ footer.major > .title {
   letter-spacing: 0.045em;
 }
 
+#footer ul.vertical.actions {
+  margin-bottom: 5em;
+}
+
+.email-signup.button .fa-spin {
+  animation: fa-spin 1s infinite linear;
+}
+
+
+/* fix wobbly fa-circle-o-notch */
+.email-signup.button .fa-circle-o-notch {
+  width: 18px;
+}
+.email-signup.button .fa-lg.fa-circle-o-notch {
+  width: 24px;
+}
+
+
 /* Remove extra before/after decorations */
 
 #header:before, #header:after,
