@@ -8,6 +8,7 @@ import quandl
 import json
 import sys
 import jinja2
+import os
 
 sys.path.append('./src/server')
 from simulate import simulate
@@ -102,4 +103,6 @@ def info(symbol):
     return data.to_html()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    host = '0.0.0.0'
+    port = 'PORT' in os.environ and int(os.environ['PORT']) or 5000
+    app.run(host=host, port=port)
