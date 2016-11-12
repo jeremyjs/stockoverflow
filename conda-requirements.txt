@@ -9,6 +9,7 @@ flask
 pymongo
 pandas
 # Quantopian/sortedcontainers: `conda install -c quantopian sortedcontainers`
+# Quantopian/Zipline: `conda install -c Quantopian Zipline`
 Quandl
 
 #

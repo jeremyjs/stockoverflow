@@ -26,7 +26,7 @@ def simulation(prices, signal_crosses, budget):
 
 # prices: { date: price }
 def simulate(prices, budget=1):
-    signal_crosses = long_short_signal_crosses(prices)
+    signal_crosses = long_short_signal_crosses(prices, short_period=15, long_period=45)
     sim, earnings = simulation(prices, signal_crosses, budget)
 
     return signal_crosses, sim, earnings

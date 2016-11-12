@@ -16,6 +16,7 @@ from config import keys
 
 sys.path.append('./src/server/db')
 from connection import truefx
+# from emails import createEmail
 
 # Custom config for templates folder
 app = Flask(__name__.split('.')[0])
@@ -30,6 +31,13 @@ app.jinja_loader = my_loader
 @app.route('/')
 def root():
     return render_template('index.html')
+
+# @app.route('/email/signup/<email>')
+# def email_signup(email):
+#     print email
+#     data = createEmail({'email': email})
+#     print data
+#     return json.dumps({'code': 200, 'success': True, 'data': data})
 
 @app.route('/dashboard')
 def dashboard():
@@ -54,8 +62,10 @@ def forex_data(symbol):
 @app.route('/simulate/<symbol>.json')
 def run_simulation(symbol):
     query_params = request.args
-    trim_start = query_params.get('start_date') or '2015-11-01'
-    trim_end = query_params.get('end_date') or '2015-12-31'
+    print query_params.get('startdate')
+    print query_params.get('enddate')
+    trim_start = query_params.get('startdate') or '2015-11-01'
+    trim_end = query_params.get('enddate') or '2016-11-01'
     prices = get_prices([symbol], trim_start=trim_start, trim_end=trim_end)
     prices = prices[symbol]
     signal_crosses, simulation, earnings = simulate(prices)
@@ -73,13 +83,13 @@ def run_simulation(symbol):
 @app.route('/symbol/<symbol>')
 def symbol_overview(symbol):
     query_params = request.args
-    trim_start = query_params.get('start_date') or '2015-12-01'
-    trim_end = query_params.get('end_date') or '2015-12-31'
+    trim_start = query_params.get('startdate') or '2015-12-01'
+    trim_end = query_params.get('enddate') or '2015-12-31'
     database_code = query_params.get('database_code') or 'WIKI'
     # datasets = quandl.search(symbol, authtoken=keys['quandl'], verbose = False)
     code = database_code + "/" + symbol  # datasets[0][u'code']
     data = quandl.get(code, authtoken=keys['quandl'], collapse='daily', trim_start=trim_start, trim_end=trim_end)
-    return render_template('symbol_overview.html', title=symbol, data=data)
+    return render_template('symbol_overview.html', symbol=symbol, data=data)
 
 def info(symbol):
     query_params = request.args
